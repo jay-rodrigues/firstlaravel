@@ -33,3 +33,12 @@ Route::get('/displayusers', 'App\Http\Controllers\DisplayUsersController@index')
 Route::get('/generate/{length}', 'App\Http\Controllers\KeyGeneratorController@generate');
 Route::get('/key', 'App\Http\Controllers\KeyGeneratorController@keyGenerateView');
 
+Route::get('/caesarencipher/{string}/{key}', 'App\Http\Controllers\CaesarCipherController@encipher');
+Route::get('/caesarencipher/{string}', 'App\Http\Controllers\CaesarCipherController@encipher');
+
+Route::get('/caesardecipher/{string}/{key}', 'App\Http\Controllers\CaesarCipherController@decipher');
+Route::get('/caesardecipher/{string}', 'App\Http\Controllers\CaesarCipherController@decipher');
+
+Route::get('/caesarcipher', 'App\Http\Controllers\CaesarCipherController@caesarGenerateView');
+
+

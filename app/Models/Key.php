@@ -7,7 +7,8 @@ namespace App\Models;
 class Key
 {
 
-    public static function generate($length = 25){
+    public static function generate($length = 25)
+    {
         $string = '';
 
         while (($len = strlen($string)) < $length) {

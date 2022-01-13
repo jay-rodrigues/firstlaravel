@@ -10,14 +10,23 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-auto">
-                                <label for="length" class="form-label">Length Desired for Encryption Key (default= 25):</label>
+                                <label for="input-string" class="form-label">Message to Encrypt/Decrypt:</label>
                             </div>
                             <div class="col-auto">
-                                <input type="number" class="form-control" min="1" id="length" value="25">
+                                <input type="text" class="form-control" id="input-string" >
+                            </div>
+                            <br>
+                            <div class="col-auto">
+                                <label for="input-key" class="form-label">Desired Shift Amount (leave 0 for random or unknown key):</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" class="form-control" min="0" max="26" id="input-key" value="0">
                             </div>
                         </div>
                     </div>
-                    <button type="button" id="generate" onclick="generateKey()" class="btn btn-primary">Generate</button>
+                    <button type="button" id="encipher" onclick="encipherString()" class="btn btn-primary">Encipher</button>
+                    <button type="button" id="decipher" onclick="decipherString()" class="btn btn-primary">Decipher</button>
+
                 </form>
 
                 {{-- Div to display key --}}

@@ -34,6 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item dropdown">
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Project 1
                             </a>
@@ -42,6 +43,23 @@
                                 <a class="dropdown-item" href="/displayusers">Display Users</a>
                                 <a class="dropdown-item" href="/posts">View Posts</a>
                                 <a class="dropdown-item" href="/posts/create">New Post</a>
+
+
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Encryption Tools
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/key">Key Generator</a>
+                                <a class="dropdown-item" href="/caesarcipher">Caesar Cipher</a>
+
+                                {{-- <a class="dropdown-item" href="/posts">View Posts</a>
+                                <a class="dropdown-item" href="/posts/create">New Post</a> --}}
 
 
 
@@ -117,6 +135,32 @@
             row.appendChild(content);
             tablebody.appendChild(row);
         }
+
+        function encipherString(){
+            let plainText = document.getElementById("input-string").value;
+            let key = document.getElementById("input-key").value;
+            axios.get(`/caesarencipher/${plainText}/${key}`)
+                .then(function(response){
+                    console.log(response.data);
+                    addKeyToDOM(response.data);
+                })
+                .catch(function(error){
+                    console.log(error.response.data);
+                });
+        }
+        function decipherString(){
+            let plainText = document.getElementById("input-string").value;
+            let key = document.getElementById("input-key").value;
+            axios.get(`/caesardecipher/${plainText}/${key}`)
+                .then(function(response){
+                    console.log(response.data);
+                    addKeyToDOM(response.data);
+                })
+                .catch(function(error){
+                    console.log(error.response.data);
+                });
+        }
+
 
     </script>
 </body>

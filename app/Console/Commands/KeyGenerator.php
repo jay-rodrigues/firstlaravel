@@ -41,7 +41,7 @@ class KeyGenerator extends Command
 
         //Read the comment above please
         $length = $this->argument('length');
-
-        return 0;
+        print($length);
+        return $length;
     }
 }
