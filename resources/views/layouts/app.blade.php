@@ -92,5 +92,32 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        //grabs int from webpage
+        function generateKey(){
+            let length = document.getElementById("length").value;
+
+            axios.get(`/generate/${length}`)
+                .then(function(response){
+                    console.log(response.data);
+                    addKeyToDOM(response.data);
+                })
+                .catch(function(error){
+                    console.log(error.response.data);
+                });
+        }
+        //function to display key
+        function addKeyToDOM(key){
+            let tablebody = document.getElementById("table-body");
+            console.log(tablebody);
+            let row = document.createElement("tr");
+            let content = document.createElement("th");
+
+            content.innerHTML = key;
+            row.appendChild(content);
+            tablebody.appendChild(row);
+        }
+
+    </script>
 </body>
 </html>

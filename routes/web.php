@@ -29,6 +29,7 @@ Route::get('/posts/create', 'App\Http\Controllers\PostController@create');
 Route::get('/posts/view/{displaystring}', "App\Http\Controllers\PostController@indexbyid");
 
 Route::get('/displayusers', 'App\Http\Controllers\DisplayUsersController@index');
-// Route::post('/displayusers', 'App\Http\Controllers\DisplayUsersController@show');
 
-// Route::get('/posts/{posts_id}', 'PostsController@edit');
+Route::get('/generate/{length}', 'App\Http\Controllers\KeyGeneratorController@generate');
+Route::get('/key', 'App\Http\Controllers\KeyGeneratorController@keyGenerateView');
+
