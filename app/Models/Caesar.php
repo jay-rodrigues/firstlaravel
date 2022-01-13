@@ -34,6 +34,7 @@ class Caesar extends Cipher
             $this->key = rand(1,26);
             //dump("Encoding with random key = " . $this->key);
         }
+        //Send to the encipher function for modification
         $this->str = $this->Encipher($this->str,$this->key);
         return $this->str;
     }
@@ -108,84 +109,6 @@ class Caesar extends Cipher
         $this->str = $decipherinput;
         return $this->str;
     }
-    // function cipher($ch, $key)
-    // {
-    //     if (!ctype_alpha($ch))
-    //         return $ch;
 
-    //     $offset = ord(ctype_upper($ch) ? 'A' : 'a');
-    //     return chr(fmod(((ord($ch) + $key) - $offset), 26) + $offset);
-    // }
-
-    // public function encrypt()
-    // {
-    //     $output = "";
-    //     $input = $this->str;
-    //     dump("At beginning of encrypt: ".$this->str);
-    //     $inputArr = str_split($input);
-    //     foreach ($inputArr as $ch)
-    //         $output .= $this->cipher($ch, $this->key);
-
-
-    //     dump("At end of encrypt: ".$output. " " .$this->key);
-    //     return $output;
-
-    // }
-    // public function decrypt()
-    // {
-
-    //     //Execute decryption with all possible Caesers using dictionary
-    //     if($this->key == NULL)
-    //     {
-    //         $this->stringholder ="";
-
-    //         //Find the longest word in the array
-    //         //Because if we find the longest word with a given cipher
-    //         //That is an actual word then in all likelihood it is the correct cipher maybe
-    //         $inputArr = explode(" ", $this->str);
-    //         $lengths = array_map('strlen', $inputArr);
-    //         $longestString = $inputArr[array_search(max($lengths), $lengths)];
-
-    //         //Now that we found the longest string. It is time to pull the dictionary into an array
-    //         $dict = file('resources\dict\words.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-    //         //Put terms in key of the array and in lower case
-    //         $search_array = array_combine(array_map('strtolower', $dict), $dict);
-
-
-    //         //use all possible caesar ciphers on the longest string and check each against dictionary
-    //         for($counter = 0; $counter < 26; $counter++)
-    //         {
-    //             $decryptedword = $this->encrypt($longestString, 26 - $counter);
-    //             dump($decryptedword);
-    //             try
-    //             {
-    //                 if($search_array[strtolower($decryptedword)])
-    //                 {
-    //                     dump("Found ".$longestString);
-    //                     $this->str = $this->encrypt($this->str, 26 - $counter);
-    //                     return $this->str;
-    //                 }
-    //             }
-    //             catch(\Exception $e)
-    //             {
-
-    //                 dump("Did not find ".$longestString);
-    //             }
-    //         }
-
-    //     }
-    //     //Execute decryption with given cypher
-    //     else
-    //     {
-    //         dump("Reaches here");
-
-
-    //         // dump($this->key);
-    //         // dump($this->str);
-    //         return $this->encrypt($this->str, 26 - $this->key);
-    //     }
-
-    // }
 
 }

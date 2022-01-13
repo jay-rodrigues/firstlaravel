@@ -82,7 +82,8 @@ class TestCom extends Command
                 $caesar->setKey(NULL);
                 dump("Deciphered: ". $caesar->Decrypt());
             }
-            else{
+            else
+            {
                 dump("Testing with test message and random key. Default: This is the default test message");
                 $caesar = new Caesar("This is the default test message");
                 dump("Enciphered ".$caesar->Encrypt());
