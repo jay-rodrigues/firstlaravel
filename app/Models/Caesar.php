@@ -38,7 +38,7 @@ class Caesar extends Cipher
         $this->str = $this->Encipher($this->str,$this->key);
         return $this->str;
     }
-
+    //Pre-clean up because functionality isn't everything anymore
     function Decrypt(){
         //Execute decryption with all possible Caesars using dictionary
         if($this->key == NULL)
