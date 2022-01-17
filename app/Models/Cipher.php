@@ -5,7 +5,7 @@ namespace App\Models;
 abstract class Cipher
 {
     public $key;
-    public $str;
+    public $stringToEncrypt;
     //enc will determine how to encrypt
     //i.e for Ceasar cipher: 5 would be shift right 5
     abstract function Encrypt();
@@ -18,9 +18,9 @@ abstract class Cipher
         $this->key = $key;
     }
 
-    public function setString($str)
+    public function setString($newString)
     {
-        $this->str = $str;
+        $this->stringToEncrypt = $newString;
     }
 
 }
