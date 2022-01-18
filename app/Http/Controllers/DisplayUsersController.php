@@ -16,7 +16,7 @@ class DisplayUsersController extends Controller
     public function index()
     {
         //
-        return view("displayusers",["users"=>User::all()]);
+        return view("displayusers", ["users" => User::all()]);
     }
 
     /**
@@ -51,7 +51,7 @@ class DisplayUsersController extends Controller
     {
         //return redirect("posts/".$id);
         //Doesnt work
-        return view("displayusers",["users"=>User::all()]);
+        return view("displayusers",["users" => User::all()]);
     }
 
     /**

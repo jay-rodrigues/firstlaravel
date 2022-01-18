@@ -8,9 +8,9 @@ abstract class Cipher
     public $stringToEncrypt;
     //enc will determine how to encrypt
     //i.e for Ceasar cipher: 5 would be shift right 5
-    abstract function Encrypt();
+    abstract function encrypt();
 
-    abstract function Decrypt();
+    abstract function decrypt();
 
     //Not necessary
     public function setKey($key)

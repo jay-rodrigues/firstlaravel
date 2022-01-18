@@ -5,72 +5,78 @@ namespace App\Models;
 
 
 //cipher code pulled from https://www.programmingalgorithms.com/algorithm/caesar-cipher/php/
-class Caesar extends Cipher
+class Caesar extends cipher
 
 {
-    // public $str;
-    // public $key;
 
-    function __construct($str, $key = NULL)
+    public $decryptedKey;
+
+    function __construct($str, $key = null)
     {
         $this->stringToEncrypt = $str;
         $this->key = $key;
+        $this->decryptedKey = $key;
     }
 
 
     /**
-     * Cipher
+     * cipher
      *
      * @param  mixed $ch The character to modify
      * @param  mixed $key The shift
      * @return void Returns character that is $key distance from $ch
      */
-    function Cipher($ch, $key)
+    function cipher($ch, $key)
     {
+
         if (!ctype_alpha($ch))
             return $ch;
 
         $offset = ord(ctype_upper($ch) ? 'A' : 'a');
+
         return chr(fmod(((ord($ch) + $key) - $offset), 26) + $offset);
+
     }
 
     /**
-     * Encrypt
+     * encrypt
      * Access point to encrypt a string stored in $this->stringToEncrypt
      * @return void
      */
-    function Encrypt()
+    function encrypt()
     {
-        if($this->key == NULL){
+
+        if($this->key == null) {
             $this->key = rand(1,26);
-            //dump("Encoding with random key = " . $this->key);
         }
+
         //Send to the encipher function for modification
-        $this->stringToEncrypt = $this->Encipher($this->stringToEncrypt,$this->key);
+        $this->stringToEncrypt = $this->encipher($this->stringToEncrypt,$this->key);
+
         return $this->stringToEncrypt;
     }
 
 
 
     /**
-     * Decrypt
+     * decrypt
      * This is the public access function
      * Takes $this->stringToEncrypt and $this->key
      * If the key defined at construction is null; import dictionary file and perform all possible Caesar ciphers on it
      * If the key defined is not null; perform decryption with given key
      * @return void
      */
-    function Decrypt(){
+    function decrypt(){
 
-
-        if($this->key == NULL)  //Execute decryption with all possible Caesars using dictionary
-        {
+        //Execute decryption with all possible Caesars using dictionary
+        if($this->key == null)  {
 
             $this->stringholder ="";
 
-            //Find the longest word in the array
-            //Because if we find the longest word with a given cipher
-            //That is an actual word then in all likelihood it is the correct cipher maybe
+            /** Find the longest word in the array
+             *  Because if we find the longest word with a given cipher
+             * That is an actual word then in all likelihood it is the correct cipher maybe
+             */
             $inputArr = explode(" ", $this->stringToEncrypt);
             $lengths = array_map('strlen', $inputArr);
             $longestString = $inputArr[array_search(max($lengths), $lengths)];
@@ -87,18 +93,21 @@ class Caesar extends Cipher
              * the entire string. Once the word is decrypted, then it performs the decryption on the whole string
              * with the correct shift amount $counter
              */
-            for($counter = 0; $counter < 26; $counter++)    //use all possible caesar ciphers on the longest string and check each against dictionary
-            {
 
-                $decryptedword = $this->Encipher($longestString, 26 - $counter);
-                //dump("Longest String: ".$longestString ." Decrypted Word: ". $decryptedword . " Count: " . $counter);
+             //use all possible caesar ciphers on the longest string and check each against dictionary
+            for($counter = 0; $counter < 26; $counter++) {
 
-                try //Search the dictionary array for the decrypted word
-                {
-                    if($search_array[strtolower($decryptedword)])
-                    {
-                        $this->stringToEncrypt = $this->Encipher($this->stringToEncrypt, 26 - $counter); //Found the shift, decrypt whole string
+                $decryptedword = $this->encipher($longestString, 26 - $counter);
+
+                //Search the dictionary array for the decrypted word
+                try {
+
+                    if($search_array[strtolower($decryptedword)]) {
+
+                        $this->decryptedKey = $counter;
+                        $this->stringToEncrypt = $this->encipher($this->stringToEncrypt, 26 - $counter); //Found the shift, decrypt whole string
                         return $this->stringToEncrypt; //Decrpytion complete
+
                     }
                 }
                 catch(\Exception $e)    //This catch statement will execute if the word was not found in the dictionary
@@ -108,9 +117,9 @@ class Caesar extends Cipher
                 }
             }
         }
-        else    //Execute decryption with given cypher
-        {
-            $this->stringToEncrypt = $this->Decipher($this->stringToEncrypt, $this->key);
+        //Execute decryption with given cypher
+        else {
+            $this->stringToEncrypt = $this->decipher($this->stringToEncrypt, $this->key);
             return $this->stringToEncrypt;
         }
 
@@ -119,33 +128,33 @@ class Caesar extends Cipher
     }
 
     /**
-     * Encipher
+     * encipher
      *
      * @param  mixed $input String to perform cipher on
      * @param  mixed $key Number of letters to shift right
      * @return string $output Returns the $input string shifted $key letters
      */
-    function Encipher($input, $key)
+    function encipher($input, $key)
     {
         $output = "";
         $inputArr = str_split($input);
 
         foreach ($inputArr as $ch)
-            $output .= $this->Cipher($ch, $key);
+            $output .= $this->cipher($ch, $key);
 
         return $output;
     }
 
     /**
-     * Decipher
-     * Uses Encipher function to shift opposite direction
+     * decipher
+     * Uses encipher function to shift opposite direction
      * @param  mixed $input String to perform cipher on
      * @param  mixed $key Number of letters to shift
      * @return string Returns the $input string shifted $key letters
      */
-    function Decipher($input, $key)
+    function decipher($input, $key)
     {
-        $decipherinput = $this->Encipher($input, 26 - $key);
+        $decipherinput = $this->encipher($input, 26 - $key);
         $this->stringToEncrypt = $decipherinput;
         return $this->stringToEncrypt;
     }

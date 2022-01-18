@@ -17,16 +17,21 @@ class CaesarCipherController extends Controller
     public function decipher($cipherText, $key)
     {
         if($key == 0)
-            $key = NULL;
+            $key = null;
+
         $caesar = new Caesar($cipherText, $key);
-        return $caesar->Decrypt();
+        $plainText = $caesar->Decrypt();
+
+        return $caesar->decryptedKey . ": " . $plainText;
     }
 
     public function encipher($plainText, $key)
     {
         if($key == 0)
-            $key = NULL;
+            $key = null;
+
         $caesar = new Caesar($plainText, $key);
+
         return $caesar->Encrypt();
     }
 

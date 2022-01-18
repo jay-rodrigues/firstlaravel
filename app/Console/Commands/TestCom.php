@@ -49,7 +49,7 @@ class TestCom extends Command
         {
             $dict = file('resources\dict\words.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $searchstring = "test";
-            if($this->argument('string')!= NULL)
+            if($this->argument('string')!= null)
                 $searchstring = $this->argument('string');
             $search_array = array_combine(array_map('strtolower', $dict), $dict);
             try
@@ -66,32 +66,32 @@ class TestCom extends Command
         }
         if($command == "caesar")
         {
-            if($this->argument('string') != NULL && $this->argument('key') == NULL)
+            if($this->argument('string') != null && $this->argument('key') == null)
             {
                 dump("Testing with message and random key");
                 $caesar = new Caesar($this->argument('string'));
-                dump("Enciphered ".$caesar->Encrypt());
-                $caesar->setKey(NULL);
-                dump("Deciphered: ". $caesar->Decrypt());
+                dump("Enciphered ".$caesar->encrypt());
+                $caesar->setKey(null);
+                dump("Deciphered: ". $caesar->decrypt());
             }
-            else if($this->argument('key') != NULL)
+            else if($this->argument('key') != null)
             {
                 dump("Testing with message and given key");
                 $caesar = new Caesar($this->argument('string'), $this->argument('key'));
-                dump("Enciphered ".$caesar->Encrypt());
-                $caesar->setKey(NULL);
-                dump("Deciphered: ". $caesar->Decrypt());
+                dump("Enciphered ".$caesar->encrypt());
+                $caesar->setKey(null);
+                dump("Deciphered: ". $caesar->decrypt());
             }
             else
             {
                 dump("Testing with test message and random key. Default: This is the default test message");
                 $caesar = new Caesar("This is the default test message");
-                dump("Enciphered ".$caesar->Encrypt());
-                $caesar->setKey(NULL);
-                dump("Deciphered: ". $caesar->Decrypt());
+                dump("Enciphered ".$caesar->encrypt());
+                $caesar->setKey(null);
+                dump("Deciphered: ". $caesar->decrypt());
             }
 
-            // dump($caesar->Encipher());
+            // dump($caesar->encipher());
 
 
         }
@@ -110,7 +110,7 @@ class TestCom extends Command
             return $longestString;
     }
 
-    function Cipher($ch, $key)
+    function cipher($ch, $key)
     {
         if (!ctype_alpha($ch))
             return $ch;
@@ -119,19 +119,19 @@ class TestCom extends Command
         return chr(fmod(((ord($ch) + $key) - $offset), 26) + $offset);
     }
 
-    function Encipher($input, $key)
+    function encipher($input, $key)
     {
         $output = "";
 
         $inputArr = str_split($input);
         foreach ($inputArr as $ch)
-            $output .= $this->Cipher($ch, $key);
+            $output .= $this->cipher($ch, $key);
 
         return $output;
     }
 
-    function Decipher($input, $key)
+    function decipher($input, $key)
     {
-        return $this->Encipher($input, 26 - $key);
+        return $this->encipher($input, 26 - $key);
     }
 }
