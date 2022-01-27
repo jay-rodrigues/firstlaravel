@@ -124,6 +124,7 @@
                     console.log(error.response.data);
                 });
         }
+
         //function to display key
         function addKeyToDOM(key){
             let tablebody = document.getElementById("table-body");

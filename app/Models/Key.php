@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Models;
+use App\Models\Caesar;
 
 
 
@@ -19,8 +19,8 @@ class Key
             $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
         }
 
+
         return $string;
     }
-
 
 }

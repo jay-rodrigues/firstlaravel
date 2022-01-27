@@ -42,3 +42,7 @@ Route::get('/caesardecipher/{string}', 'App\Http\Controllers\CaesarCipherControl
 Route::get('/caesarcipher', 'App\Http\Controllers\CaesarCipherController@caesarGenerateView');
 
 
+Route::get('/chatroom', function () {
+    return view('globalchat.chatroom');
+});
+

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Events\NewMessage;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -45,10 +46,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        //New post was created
+
         $data = $request->all();
         $post = new Post($data);
         $post->user()->associate($request->user());
         $post->save();
+        //NewMessage::dispatch("A new post was created: " . $post->text);
         return redirect("posts");
     }
 
