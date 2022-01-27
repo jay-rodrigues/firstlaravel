@@ -46,3 +46,7 @@ Route::get('/chatroom', function () {
     return view('globalchat.chatroom');
 });
 
+
+Route::get('/chats', 'App\Http\Controllers\ChatsController@index');
+Route::get('/messages', 'App\Http\Controllers\ChatsController@fetchMessages');
+Route::post('/messages', 'App\Http\Controllers\ChatsController@sendMessage');
