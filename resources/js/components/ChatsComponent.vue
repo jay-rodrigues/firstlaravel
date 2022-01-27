@@ -4,7 +4,7 @@
            <div class="card card-default">
                <div class="card-header">Messages</div>
                <div class="card-body p-0">
-                   <ul class="list-unstyled" style="height:300px; overflow-y:scroll">
+                   <ul class="list-unstyled" style="height:300px; overflow-y:scroll" v-chat-scroll>
                        <!-- loop through messages array and display message with username -->
                        <li class="p-2" v-for="(message, index) in messages" :key="index">
                            <strong>{{ message.user.name }}</strong>
@@ -14,7 +14,7 @@
                </div>
                <input @keyup.enter="sendMessage" v-model="newMessage" type="text" name="message" placeholder="Enter your message.." class="form-control">
            </div>
-            <span class="text-muted">user is typing</span>
+            <!-- <span class="text-muted">user is typing</span> -->
        </div>
 
         <div class="col-4">
@@ -45,23 +45,26 @@
                 users:[]
             }
         },
-
-        created() {
-            this.fetchMessages();
-
+        mounted(){
             Echo.join('chat')
+                .listen('MessageSent', (event) => {
+                    this.messages.push(event.message);
+                })
                 .here(user => {
                     this.users = user;
                 })
                 .joining(user => {
                     this.users.push(user);
                 })
-                .leave(user => {
-                   this.users = this.users.filter(u => u.id != user.id);
-                })
-                .listen('MessageSent', (event) => {
-                    this.messages.push(event.message);
+                .leaving(user => {
+                    this.users = this.users.filter(u => u.id != user.id);
                 });
+        },
+
+        created() {
+            this.fetchMessages();
+
+
         },
 
         methods: {

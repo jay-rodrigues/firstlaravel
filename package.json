@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "laravel-echo": "^1.11.3",
-        "pusher-js": "^7.0.3"
+        "pusher-js": "^7.0.3",
+        "vue-chat-scroll": "^1.4.0"
     }
 }
