@@ -26,6 +26,8 @@ Vue.use(VueChatScroll);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('chats', require('./components/ChatsComponent.vue').default);
+Vue.component('display-active-users', require('./components/DisplayActiveUsers.vue').default);
+Vue.component('user-tracker-component', require('./components/UserTrackerComponent.vue').default);
 
 
 /**

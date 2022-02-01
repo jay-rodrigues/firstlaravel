@@ -43,6 +43,7 @@
                                 <a class="dropdown-item" href="/displayusers">Display Users</a>
                                 <a class="dropdown-item" href="/posts">View Posts</a>
                                 <a class="dropdown-item" href="/posts/create">New Post</a>
+                                <a class="dropdown-item" href="/chats">Chat Room</a>
 
 
 
@@ -65,6 +66,7 @@
 
                             </div>
                         </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -107,10 +109,12 @@
         </nav>
 
         <main class="py-4">
+            <user-tracker-component></user-tracker-component>
             @yield('content')
         </main>
     </div>
     <script>
+
         //grabs int from webpage
         function generateKey(){
             let length = document.getElementById("length").value;

@@ -14,6 +14,7 @@
                </div>
                <input @keyup.enter="sendMessage" v-model="newMessage" type="text" name="message" placeholder="Enter your message.." class="form-control">
            </div>
+           <!-- to do the user is typing check video https://www.youtube.com/watch?v=-9-OUYVC8sc&t=0s -->
             <!-- <span class="text-muted">user is typing</span> -->
        </div>
 

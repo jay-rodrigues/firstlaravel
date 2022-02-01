@@ -37,4 +37,8 @@
         </div>
     </div>
 </div>
+<div class="container">
+
+    <display-active-users> </display-active-users>
+</div>
 @endsection
